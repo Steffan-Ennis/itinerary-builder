@@ -8,6 +8,9 @@
 
 	.config(function ($stateProvider) {
 
+		/*
+		 * initialising states for itinerary-builder
+		 */
 		$stateProvider
 
 			.state('site.itinerary-builder', {
@@ -21,12 +24,25 @@
 					}
 				}
 			})
-			.state('site.itinerary-builder.newForm', {
+			.state('site.itinerary-builder.new', {
 				parent: 'site.itinerary-builder',
-				url: '/itinerary-builder/newForm',
+				url: '/itinerary-builder/new',
 				views: {
 					'content@': {
 						templateUrl: 'scripts/itinerary/itinerary-form.html',
+						controller: 'itineraryFormController',
+						controllerAs: 'itineraryFormCtrl'
+					}
+				}
+			})
+			.state('site.itinerary-builder.edit', {
+				parent: 'site.itinerary-builder',
+				url: '/itinerary-builder/edit/:itineraryIndex',
+				views: {
+					'content@': {
+						templateUrl: 'scripts/itinerary/itinerary-form.html',
+						controller: 'itineraryFormController',
+						controllerAs: 'itineraryFormCtrl'
 					}
 				}
 			});
@@ -42,9 +58,9 @@
 		var self = this;
 
 		/*
-		 * Collection for storing trips
+		 * Collection for storing itineraries
 		 */
-		this.trips = [];
+		this.itineraries = [];
 
 		/*
 		 * Defining constant option arrays to be passed to forms
@@ -64,7 +80,7 @@
 		 */
 		this.Itinerary = function (name) {
 			this.stops = [];
-			name = this.name;
+			this.name = name;
 			/* This data is auto populated*/
 			this.metaData = {
 				'total itineraries': 0,

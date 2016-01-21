@@ -1,4 +1,45 @@
 <div class="row">
-  <form>
+  <form name="" class="form-horizontal">
+    <div class="form-group label-floating"> 
+      <label class="control-label" for="focusedName">Name:</label>
+      <input type="text" class="form-control" id="focusedName" name="name" ng-model="itinerary.name">
+    </div>
   </form>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Summary</h3>
+    </div>
+    <div class="panel-body">
+      <span>
+        <p>Total Stops {{itinerary.metaData.totalStops}}</p>
+        <p>Total Sites {{itinerary.metaData.totalSites}}</p>
+        <p>Itinerary Duration {{itinerary.metaData.duration}}</p>
+      </span> 
+    </div>
+  </div>
+  <div>  
+    <h1>Trips</h1>
+    <button class="btn btn-raised btn-primary pull-right" ng-click="siteCtrl.redirectToForm()">Build Itinerary</button>
+    <table class="table table-striped col-lg-12">
+      <tr>
+        <th>Departure Date</th>
+        <th>Departure City</th>
+        <th>Arrival City</th>   
+        <th>Visting Classfied Sites</th>
+        <th class="text-center">Actions</th>
+      </tr>
+      <tr ng-repeat="itinerary in itineraries">
+        <td>{{site.departureDate}}</td>
+        <td>{{site.departureCity}}</td>
+        <td>{{site.arrivalCity}}</td>
+        <td>{{site.visitinClassifiedSites}}</td>
+        <td class="col-lg-3 text-center">
+          <div class="btn-group" role="group">         
+            <button type="button" class="btn btn-raised btn-primary" ng-click="siteCtrl.redirectToForm($index)">Edit</button>
+            <button type="button" class="btn btn-raised btn-danger">Delete</button>
+          </div>
+        </td>
+      </tr>         
+    </table>
+  </div>
 </div>

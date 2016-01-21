@@ -22,7 +22,7 @@
 		])
 
 	.config(function ($stateProvider, $urlRouterProvider) {
-
+		$.material.init();
 		$stateProvider
 
 			.state('site', {

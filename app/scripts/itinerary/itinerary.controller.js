@@ -14,11 +14,12 @@
 
 			this.redirectToForm = function (itineraryIndex) {
 				if (typeof itineraryIndex !== 'undefined') {
-					$state.go('site.itinerary.editForm', {
+					console.log(itineraryIndex);
+					$state.go('site.itinerary-builder.edit', {
 						'itineraryIndex': itineraryIndex
 					});
 				} else {
-					$state.go('site.itinerary-builder.newForm');
+					$state.go('site.itinerary-builder.new');
 				}
 			};
 

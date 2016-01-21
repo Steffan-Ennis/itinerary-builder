@@ -29,7 +29,7 @@
 				url: '/itinerary-builder/new',
 				views: {
 					'content@': {
-						templateUrl: 'scripts/itinerary/itinerary-form.html',
+						templateUrl: 'scripts/itinerary/itinerary-form/itinerary-form.html',
 						controller: 'itineraryFormController',
 						controllerAs: 'itineraryFormCtrl'
 					}
@@ -40,7 +40,7 @@
 				url: '/itinerary-builder/edit/:itineraryIndex',
 				views: {
 					'content@': {
-						templateUrl: 'scripts/itinerary/itinerary-form.html',
+						templateUrl: 'scripts/itinerary/itinerary-form/itinerary-form.html',
 						controller: 'itineraryFormController',
 						controllerAs: 'itineraryFormCtrl'
 					}

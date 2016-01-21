@@ -1,0 +1,46 @@
+<div class="row">
+  <h1>Stop</h1>
+  <form name="" class="form-horizontal">
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focuseDate">Departure Date:</label>
+      <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">
+    </div>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focusedDepartureCity">Departure City:</label>
+      <input type="text" class="form-control" id="focusedDepartureCity" name="departureCity" ng-model="stop.departureCity">
+    </div>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focuseArrivalCity">Arrival City:</label>
+      <input type="text" class="form-control" id="focuseArrivalCity" name="arrivalCity" ng-model="stop.arrivalCity">
+    </div>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focusedVisitingClassifiedSites">Visiting Classified Sites:</label>
+      <input type="checkbox" class="form-control" id="focusedVisitingClassifiedSites" name="visitinClassifiedSites" ng-model="stop.visitinClassifiedSites">
+    </div>
+  </form>
+  <div ng-show="stop.visitinClassifiedSites">  
+    <h1>Stops</h1>
+    <button class="btn btn-raised btn-primary pull-right" ng-click="stopFormCtrl.redirectToSiteForm()">New Site</button>
+    <table class="table table-striped col-lg-12">
+      <tr>
+        <th>Agency/Facility</th>
+        <th>Visit to</th>
+        <th>Sponsor</th>   
+        <th>Purpose of Visit</th>
+        <th class="text-center">Actions</th>
+      </tr>
+      <tr ng-repeat="site in stop.sites">
+        <td>{{site.agencyFacility}}</td>
+        <td>{{site.visitTo}}</td>
+        <td>{{site.sponsor}}</td>
+        <td>{{site.purpose}}</td>
+        <td class="col-lg-3 text-center">
+          <div class="btn-group" role="group">         
+            <button type="button" class="btn btn-raised btn-primary" ng-click="siteCtrl.redirectToSiteForm($index)">Edit</button>
+            <button type="button" class="btn btn-raised btn-danger">Delete</button>
+          </div>
+        </td>
+      </tr>         
+    </table>
+  </div>
+</div>

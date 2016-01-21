@@ -45,6 +45,32 @@
 						controllerAs: 'itineraryFormCtrl'
 					}
 				}
+			})
+			.state('site.itinerary-builder.stop', {
+				parent: 'site.itinerary-builder',
+				abstract: true
+			})
+			.state('site.itinerary-builder.stop.new', {
+				parent: 'site.itinerary-builder.stop',
+				url: '/itinerary-builder/:itineraryIndex/stop/new',
+				views: {
+					'content@': {
+						templateUrl: 'scripts/itinerary/stop-form/stop-form.html',
+						controller: 'stopformController',
+						controllerAs: 'stopFormCtrl'
+					}
+				}
+			})
+			.state('site.itinerary-builder.stop.edit', {
+				parent: 'site.itinerary-builder.stop',
+				url: '/itinerary-builder/:itineraryIndex/stop/edit/:stopIndex',
+				views: {
+					'content@': {
+						templateUrl: 'scripts/itinerary/stop-form/stop-form.html',
+						controller: 'stopformController',
+						controllerAs: 'stopFormCtrl'
+					}
+				}
 			});
 	})
 
@@ -52,215 +78,225 @@
 	 * CRUD and data store  for itinerary data
 	 * @return itineraryData service for dependency injection
 	 */
-	.service('itineraryData', [function () {
+	.service('itineraryData', ['$localStorage',
+
+		function ($localStorage) {
 
 
-		var self = this;
+			var self = this;
 
-		/*
-		 * Collection for storing itineraries
-		 */
-		this.itineraries = [];
+			/**
+			 * initialising local storage
+			 */
+			if (typeof $localStorage.itineraries === 'undefined') {
+				$localStorage.itineraries = [];
+			}
 
-		/*
-		 * Defining constant option arrays to be passed to forms
-		 */
+			/*
+			 * Collection for storing itineraries
+			 */
+			this.itineraries = $localStorage.itineraries;
 
-		this.visitTypes = ['One Time', 'Recurring', 'Extended'];
-		this.requestTypes = ['Amendment', 'Routine', 'Urgent'];
-		this.visitTo = ['Government facility', 'Commercial facility'];
+			/*
+			 * Defining constant option arrays to be passed to forms
+			 */
 
-		/**
-		 * Defining constructors for consistency
-		 */
+			this.visitTypes = ['One Time', 'Recurring', 'Extended'];
+			this.requestTypes = ['Amendment', 'Routine', 'Urgent'];
+			this.visitTo = ['Government facility', 'Commercial facility'];
+
+			/**
+			 * Defining constructors for consistency
+			 */
 
 
-		/**
-		 * Collection object for itineraries
-		 */
-		this.Itinerary = function (name) {
-			this.stops = [];
-			this.name = name;
-			/* This data is auto populated*/
-			this.metaData = {
-				'total itineraries': 0,
-				'total sites': 0,
-				'duration': ''
+			/**
+			 * Collection object for itineraries
+			 */
+			this.Itinerary = function (name) {
+				this.stops = [];
+				this.name = name;
+				/* This data is auto populated*/
+				this.metaData = {
+					'total itineraries': 0,
+					'total sites': 0,
+					'duration': ''
+				};
 			};
-		};
 
-		/**			
-		 * Itinerary Contstructor
-		 * @param {Date}   departureDate
-		 * @param {String} departureCity
-		 * @param {String} arrivalCity
-		 * @param {String} visitingCity
-		 * @param {bool}   visitingClassifiedSites
-		 */
-		this.Stop = function (departureDate, departureCity, arrivalCity, visitingCity, visitinClassifiedSites) {
-			this.departureDate = departureDate;
-			this.departureCity = departureCity;
-			this.arrivalCity = arrivalCity;
-			this.visitingCity = visitingCity;
-			this.visitinClassifiedSites = visitinClassifiedSites;
-			this.sites = [];
-		};
-
-
-		/**
-		 * Site constructor
-		 * @param {Date}           dateFrom
-		 * @param {Date}           dateTo
-		 * @param {String}         visitType
-		 * @param {String}         requestType
-		 * @param {AgencyFacility} agencyFacility
-		 * @param {VisitorCoord}   visitorCoord
-		 * @param {Sponsor}        sponsor
-		 * @param {String}         purpose
-		 * @param {String}         visitIsPertinentTo
-		 */
-		this.Site = function (dateFrom, dateTo, visitType, requestType, agencyFacility, visitorCoord, sponsor, purpose, visitIsPertinentTo) {
-			this.dateFrom = dateFrom;
-			this.dateTo = dateTo;
-			this.visitType = visitType;
-			this.requestType = requestType;
-			this.detailsOfAgencyFacility = agencyFacility;
-			this.visitorCoord = visitorCoord = visitorCoord;
-			this.sponsor = sponsor;
-			this.purpose = purpose;
-			this.visitIsPertinentTo = visitIsPertinentTo;
-		};
-
-		/**
-		 * AgencyFacility constructor
-		 * @param {String} name
-		 * @param {Number} phoneNumber
-		 * @param {String} email
-		 * @param {String} address
-		 */
-		this.AgencyFacility = function (name, phoneNumber, email, address) {
-			this.name = name;
-			this.phoneNumber = phoneNumber;
-			this.email = email;
-			this.address = address;
-		};
-
-		/**
-		 * Sponsor constructor
-		 * @param {String} name
-		 * @param {String} organisation
-		 * @param {Number} phoneNumber
-		 * @param {String} email
-		 */
-		this.Sponsor = function (name, organisation, phoneNumber, email) {
-			this.name = name;
-			this.organisation = organisation;
-			this.phoneNumber = phoneNumber;
-			this.email = email;
-		};
-
-		/**
-		 * VisitCoord constructor
-		 * @param {String} name
-		 * @param {Number} phoneNumber
-		 * @param {String} email
-		 * @param {String} fax
-		 * @param {String} address
-		 */
-		this.VisitCoord = function (name, phoneNumber, email, fax, address) {
-			this.name = name;
-			this.phoneNumber = phoneNumber;
-			this.email = email;
-			this.fax = fax;
-			this.address = address;
-		};
+			/**			
+			 * Itinerary Contstructor
+			 * @param {Date}   departureDate
+			 * @param {String} departureCity
+			 * @param {String} arrivalCity
+			 * @param {String} visitingCity
+			 * @param {bool}   visitingClassifiedSites
+			 */
+			this.Stop = function (departureDate, departureCity, arrivalCity, visitingCity, visitinClassifiedSites) {
+				this.departureDate = departureDate;
+				this.departureCity = departureCity;
+				this.arrivalCity = arrivalCity;
+				this.visitingCity = visitingCity;
+				this.visitinClassifiedSites = visitinClassifiedSites;
+				this.sites = [];
+			};
 
 
-		/**
-		 * pushes itenerary onto itenearies at trip index
-		 * @param  {Stop}    stop
-		 * @param  {Integer} itineraryIndex
-		 */
-		this.saveStop = function (stop, intineraryIndex) {
-			this.itineraries[intineraryIndex].itineraries.push(stop);
-		};
+			/**
+			 * Site constructor
+			 * @param {Date}           dateFrom
+			 * @param {Date}           dateTo
+			 * @param {String}         visitType
+			 * @param {String}         requestType
+			 * @param {AgencyFacility} agencyFacility
+			 * @param {VisitorCoord}   visitorCoord
+			 * @param {Sponsor}        sponsor
+			 * @param {String}         purpose
+			 * @param {String}         visitIsPertinentTo
+			 */
+			this.Site = function (dateFrom, dateTo, visitType, requestType, agencyFacility, visitorCoord, sponsor, purpose, visitIsPertinentTo) {
+				this.dateFrom = dateFrom;
+				this.dateTo = dateTo;
+				this.visitType = visitType;
+				this.requestType = requestType;
+				this.detailsOfAgencyFacility = agencyFacility;
+				this.visitorCoord = visitorCoord = visitorCoord;
+				this.sponsor = sponsor;
+				this.purpose = purpose;
+				this.visitIsPertinentTo = visitIsPertinentTo;
+			};
 
-		/**
-		 * updates the stop in the stops collection stored on an itinerary
-		 * @param  {Stop} stop
-		 * @param  {Integer} itineraryIndex
-		 * @param  {Integer} stopIndex
-		 */
-		this.updateStop = function (stop, itineraryIndex, stopIndex) {
-			this.itineraries[itineraryIndex].stops[stopIndex] = stop;
-		};
+			/**
+			 * AgencyFacility constructor
+			 * @param {String} name
+			 * @param {Number} phoneNumber
+			 * @param {String} email
+			 * @param {String} address
+			 */
+			this.AgencyFacility = function (name, phoneNumber, email, address) {
+				this.name = name;
+				this.phoneNumber = phoneNumber;
+				this.email = email;
+				this.address = address;
+			};
+
+			/**
+			 * Sponsor constructor
+			 * @param {String} name
+			 * @param {String} organisation
+			 * @param {Number} phoneNumber
+			 * @param {String} email
+			 */
+			this.Sponsor = function (name, organisation, phoneNumber, email) {
+				this.name = name;
+				this.organisation = organisation;
+				this.phoneNumber = phoneNumber;
+				this.email = email;
+			};
+
+			/**
+			 * VisitCoord constructor
+			 * @param {String} name
+			 * @param {Number} phoneNumber
+			 * @param {String} email
+			 * @param {String} fax
+			 * @param {String} address
+			 */
+			this.VisitCoord = function (name, phoneNumber, email, fax, address) {
+				this.name = name;
+				this.phoneNumber = phoneNumber;
+				this.email = email;
+				this.fax = fax;
+				this.address = address;
+			};
 
 
-		/**
-		 * Removes the stop from the iteneraries collection at the indexes passed in
-		 * @param  {Integer} itineraryIndex
-		 * @param  {Integer} stopIndex
-		 */
-		this.deleteStop = function (itineraryIndex, stopIndex) {
-			this.itineraries[itineraryIndex].stops.splice(stopIndex, 1);
-		};
+			/**
+			 * pushes itenerary onto itenearies at trip index
+			 * @param  {Stop}    stop
+			 * @param  {Integer} itineraryIndex
+			 */
+			this.saveStop = function (stop, itineraryIndex) {
+				$localStorage.itineraries[itineraryIndex].stops.push(stop);
+			};
 
-		/**
-		 * Pushes the site onto the sites array at itinerary index
-		 * @param  {Site}    site
-		 * @param  {Integer} itineraryIndex
-		 */
-		this.saveSite = function (site, itineraryIndex) {
-			self.trips[itineraryIndex].push(site);
-		};
-
-
-		/**
-		 * Pushes updates the site on the trip collection
-		 * @param  {Site}    site
-		 * @param  {Integer} siteIndex
-		 * @param  {Integer} stopIndex
-		 * @param  {Integer} itineraryIndex
-		 */
-		this.updateSite = function (site, siteIndex, stopIndex, itineraryIndex) {
-			self.itineraries[itineraryIndex].stops[stopIndex].sites[siteIndex] = site;
-		};
+			/**
+			 * updates the stop in the stops collection stored on an itinerary
+			 * @param  {Stop} stop
+			 * @param  {Integer} itineraryIndex
+			 * @param  {Integer} stopIndex
+			 */
+			this.updateStop = function (stop, itineraryIndex, stopIndex) {
+				$localStorage.itineraries[itineraryIndex].stops[stopIndex] = stop;
+			};
 
 
-		/**
-		 * Removes the site from the itineraries at the indexes passed in
-		 * @param  {Integer} siteIndex
-		 * @param  {Integer} stopIndex
-		 * @param  {Integer} itineraryIndex
-		 */
-		this.deleteSite = function (siteIndex, stopIndex, itineraryIndex) {
-			this.itineraries[itineraryIndex].stops[stopIndex].sites.splice(siteIndex, 1);
-		};
+			/**
+			 * Removes the stop from the iteneraries collection at the indexes passed in
+			 * @param  {Integer} itineraryIndex
+			 * @param  {Integer} stopIndex
+			 */
+			this.deleteStop = function (itineraryIndex, stopIndex) {
+				$localStorage.itineraries[itineraryIndex].stops.splice(stopIndex, 1);
+			};
 
-		/**
-		 * creates a new trip and pushes it onto the trip collection
-		 */
-		this.saveItinerary = function () {
-			self.itineraries.push(new self.Itinerary());
-		};
+			/**
+			 * Pushes the site onto the sites array at itinerary index
+			 * @param  {Site}    site
+			 * @param  {Integer} itineraryIndex
+			 */
+			this.saveSite = function (site, itineraryIndex) {
+				self.trips[itineraryIndex].push(site);
+			};
 
-		/**
-		 * updates the itinerary collection at the itineraryIndex
-		 * @param  {Itinerary} itinerary
-		 * @param  {Integer} itineraryIndex
-		 */
-		this.updateItineary = function (itinerary, itineraryIndex) {
-			self.itineraries[itineraryIndex] = itinerary;
-		};
 
-		/**
-		 * Removes the itinerary from the collection at the index passed in
-		 * @param  {Integer} itineraryIndex
-		 */
-		this.deleteItinerary = function (itineraryIndex) {
-			self.itineraries.splice(itineraryIndex, 1);
-		};
+			/**
+			 * Pushes updates the site on the trip collection
+			 * @param  {Site}    site
+			 * @param  {Integer} siteIndex
+			 * @param  {Integer} stopIndex
+			 * @param  {Integer} itineraryIndex
+			 */
+			this.updateSite = function (site, siteIndex, stopIndex, itineraryIndex) {
+				$localStorage.itineraries[itineraryIndex].stops[stopIndex].sites[siteIndex] = site;
+			};
 
-		return self;
-	}]);
+
+			/**
+			 * Removes the site from the itineraries at the indexes passed in
+			 * @param  {Integer} siteIndex
+			 * @param  {Integer} stopIndex
+			 * @param  {Integer} itineraryIndex
+			 */
+			this.deleteSite = function (siteIndex, stopIndex, itineraryIndex) {
+				$localStorage.itineraries[itineraryIndex].stops[stopIndex].sites.splice(siteIndex, 1);
+			};
+
+			/**
+			 * creates a new trip and pushes it onto the trip collection
+			 */
+			this.saveItinerary = function () {
+				$localStorage.itineraries.push(new self.Itinerary());
+			};
+
+			/**
+			 * updates the itinerary collection at the itineraryIndex
+			 * @param  {Itinerary} itinerary
+			 * @param  {Integer} itineraryIndex
+			 */
+			this.updateItineary = function (itinerary, itineraryIndex) {
+				$localStorage.itineraries[itineraryIndex] = itinerary;
+			};
+
+			/**
+			 * Removes the itinerary from the collection at the index passed in
+			 * @param  {Integer} itineraryIndex
+			 */
+			this.deleteItinerary = function (itineraryIndex) {
+				$localStorage.itineraries.splice(itineraryIndex, 1);
+			};
+
+			return self;
+		}
+	]);
 }());

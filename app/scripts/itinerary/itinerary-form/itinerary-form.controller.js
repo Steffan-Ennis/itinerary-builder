@@ -11,23 +11,33 @@
 			 */
 			self = this;
 			$scope.itineraries = itineraryData.itineraries;
-			$scope.itinerary = 'undefined';
-			console.log($state);
+			$scope.itinerary = undefined;
+			$scope.itineraryIndex = $stateParams.itineraryIndex;
+
 			/**
 			 * initialising the pointer to the current itinerary
 			 */
 			if (typeof $stateParams.itineraryIndex === 'undefined') {
 				var itinerary = new itineraryData.Itinerary();
 				itineraryData.saveItinerary(itinerary);
-				var currentIndex = $scope.itineraries.length - 1;
-				$scope.itinerary = itineraryData.itineraries[currentIndex];
+				$scope.itineraryIndex = $scope.itineraries.length - 1;
+				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
 			} else {
-				console.log('here');
-				$scope.itinerary = itineraryData.itineraries[$state.params.itineraryIndex];
-
+				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
 			}
 
-
+			this.redirectToStopForm = function (stopIndex) {
+				if (typeof stopIndex !== 'undefined') {
+					$state.go('site.itinerary-builder.stop.edit', {
+						'itineraryIndex': $scope.itineraryIndex,
+						'stopIndex': stopIndex
+					});
+				} else {
+					$state.go('site.itinerary-builder.stop.new', {
+						'itineraryIndex': $scope.itineraryIndex
+					});
+				}
+			};
 		}
 	]);
 }());

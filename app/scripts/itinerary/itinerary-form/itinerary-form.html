@@ -18,8 +18,8 @@
     </div>
   </div>
   <div>  
-    <h1>Trips</h1>
-    <button class="btn btn-raised btn-primary pull-right" ng-click="siteCtrl.redirectToForm()">Build Itinerary</button>
+    <h1>Stops</h1>
+    <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryFormCtrl.redirectToStopForm()">New Stop</button>
     <table class="table table-striped col-lg-12">
       <tr>
         <th>Departure Date</th>
@@ -28,14 +28,14 @@
         <th>Visting Classfied Sites</th>
         <th class="text-center">Actions</th>
       </tr>
-      <tr ng-repeat="itinerary in itineraries">
-        <td>{{site.departureDate}}</td>
-        <td>{{site.departureCity}}</td>
-        <td>{{site.arrivalCity}}</td>
-        <td>{{site.visitinClassifiedSites}}</td>
+      <tr ng-repeat="stop in itinerary.stops">
+        <td>{stop.departureDate}}</td>
+        <td>{stop.departureCity}}</td>
+        <td>{stop.arrivalCity}}</td>
+        <td>{stop.visitinClassifiedSites}}</td>
         <td class="col-lg-3 text-center">
           <div class="btn-group" role="group">         
-            <button type="button" class="btn btn-raised btn-primary" ng-click="siteCtrl.redirectToForm($index)">Edit</button>
+            <button type="button" class="btn btn-raised btn-primary" ng-click="itineraryFormCtrl.redirectToStopForm($index)">Edit</button>
             <button type="button" class="btn btn-raised btn-danger">Delete</button>
           </div>
         </td>

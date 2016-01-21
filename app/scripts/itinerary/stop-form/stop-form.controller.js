@@ -19,6 +19,7 @@
 			 * initialising the pointer to the current stop
 			 */
 			var itineraryIndex = $stateParams.intineraryIndex;
+
 			if (typeof $stateParams.stopIndex === 'undefined') {
 				var stop = new itineraryData.Stop();
 				itineraryData.saveStop(stop, $scope.itineraryIndex);
@@ -27,6 +28,10 @@
 			} else {
 				$scope.stop = itineraryData.itineraries[$scope.itineraryIndex].stops[$stateParams.stopIndex];
 			}
+
+			this.deleteStop = function (siteIndex) {
+				itineraryData.deleteItinerary($scope.itineraryIndex, $scope.stopIndex, siteIndex);
+			};
 
 			this.redirectToSiteForm = function (siteIndex) {
 				if (typeof siteIndex !== 'undefined') {

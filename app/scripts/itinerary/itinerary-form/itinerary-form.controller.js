@@ -26,6 +26,10 @@
 				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
 			}
 
+			this.deleteStop = function (stopIndex) {
+				itineraryData.deleteItinerary($scope.itineraryIndex, stopIndex);
+			};
+
 			/**
 			 * redirects to currect form
 			 */

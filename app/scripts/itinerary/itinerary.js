@@ -185,7 +185,7 @@
 				this.dateTo = dateTo;
 				this.visitType = visitType;
 				this.requestType = requestType;
-				this.detailsOfAgencyFacility = agencyFacility;
+				this.agencyFacility = agencyFacility;
 				this.visitorCoord = visitorCoord = visitorCoord;
 				this.sponsor = sponsor;
 				this.purpose = purpose;

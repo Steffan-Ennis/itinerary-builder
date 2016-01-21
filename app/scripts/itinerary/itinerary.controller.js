@@ -12,6 +12,10 @@
 
 			$scope.itineraries = itineraryData.itineraries;
 
+			this.deleteItinerary = function (itineraryIndex) {
+				itineraryData.deleteItinerary(itineraryIndex);
+			};
+
 			this.redirectToForm = function (itineraryIndex) {
 				if (typeof itineraryIndex !== 'undefined') {
 					console.log(itineraryIndex);
@@ -21,10 +25,6 @@
 				} else {
 					$state.go('site.itinerary-builder.new');
 				}
-			};
-
-			this.backtoList = function () {
-				$state.go('^');
 			};
 		}
 	]);

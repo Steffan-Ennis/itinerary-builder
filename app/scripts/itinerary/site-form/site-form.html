@@ -14,15 +14,38 @@
     </fieldset>
     <fieldset>
       <legend>Visit Type</legend>
-      <div class="col-lg-3 form-group label-floating"> 
+      <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusLength">Length of Visit</label>
-        <input type="select" class="form-control date" id="focusLength" name="dateFrom" ng-model="site.lengthOfVisit">
+        <select ng-options="lengthofVisit.name for lengthofVisit in lengthOfVisitOptions" class="form-control" id="focusLength" name="dateFrom" ng-model="site.lengthOfVisit"></select>
       </div>
-      <div class="col-lg-3 form-group label-floating"> 
+      <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focus">Request Type</label>
-        <input type="select" class="form-control date" id="focus" name="dateTo" ng-model="site.requestType">
+        <select ng-options="requestType.name for requestType in requestTypeOptions" class="form-control" id="focus" name="dateTo" ng-model="site.requestType"></select>
       </div>    
     </fieldset>
+    <fieldset>
+      <legend>Request Facility or Visitor co-ordinator</legend>
+      <div class="col-lg-12 form-group label-floating"> 
+        <label class="control-label" for="focusVisitorCoordName">Name:</label>
+        <input type="text" class="form-control date" id="focusVisitorCoordName" name="visitorCoord_name" ng-model="site.visitorCoord.name">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusVisitorCoordPhone">Phone:</label>
+        <input type="text" class="form-control" id="focusVisitorCoordPhone" name="visitorCoord_phone" ng-model="site.visitorCoord.phone">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusVisitorCoordFax">Fax:</label>
+        <input type="text" class="form-control" id="focusVisitorCoordFax" name="visitorCoord_fax" ng-model="site.visitorCoord.fax">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusVisitorCoordEmail">Email:</label>
+        <input type="text" class="form-control" id="focusVisitorCoordEmail" name="visitorCoord_email" ng-model="site.visitorCoord.email">
+      </div>
+       <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusVisitorCoordAddress">Address:</label>
+        <input type="text" class="form-control" id="focusVisitorCoordAddress" name="visitorCoord_address" ng-model="site.visitorCoord.address">
+      </div>     
+    </fieldset>>
     <div class="col-lg-6 form-group label-floating"> 
       <label class="control-label" for="focuseDate">Departure Date:</label>
       <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">

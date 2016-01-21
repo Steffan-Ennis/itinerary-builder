@@ -1,0 +1,43 @@
+<div class="row">
+  <h1>Site<span class="pull-right"><i ng-click="siteFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
+  <form name="" class="form-horizontal">
+    <fieldset>
+      <legend>Date</legend>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focuseDateFrom">Date From:</label>
+        <input type="text" class="form-control date" id="focuseDateFrom" name="dateFrom" ng-model="site.dateFrom">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focuseDateTo">Date To:</label>
+        <input type="text" class="form-control date" id="focuseDateTo" name="dateTo" ng-model="site.dateTo">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Visit Type</legend>
+      <div class="col-lg-3 form-group label-floating"> 
+        <label class="control-label" for="focusLength">Length of Visit</label>
+        <input type="select" class="form-control date" id="focusLength" name="dateFrom" ng-model="site.lengthOfVisit">
+      </div>
+      <div class="col-lg-3 form-group label-floating"> 
+        <label class="control-label" for="focus">Request Type</label>
+        <input type="select" class="form-control date" id="focus" name="dateTo" ng-model="site.requestType">
+      </div>    
+    </fieldset>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focuseDate">Departure Date:</label>
+      <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">
+    </div>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focusedDepartureCity">Departure City:</label>
+      <input type="text" class="form-control" id="focusedDepartureCity" name="departureCity" ng-model="stop.departureCity">
+    </div>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focuseArrivalCity">Arrival City:</label>
+      <input type="text" class="form-control" id="focuseArrivalCity" name="arrivalCity" ng-model="stop.arrivalCity">
+    </div>
+    <div class="col-lg-6 form-group label-floating"> 
+      <label class="control-label" for="focusedVisitingClassifiedSites">Visiting Classified Sites:</label>
+      <input type="checkbox" class="form-control" id="focusedVisitingClassifiedSites" name="visitinClassifiedSites" ng-model="stop.visitinClassifiedSites">
+    </div>
+  </form>
+</div>

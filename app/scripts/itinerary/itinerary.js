@@ -71,6 +71,32 @@
 						controllerAs: 'stopFormCtrl'
 					}
 				}
+			})
+			.state('site.itinerary-builder.stop.site', {
+				parent: 'site.itinerary-builder.stop',
+				abstract: true
+			})
+			.state('site.itinerary-builder.stop.site.new', {
+				parent: 'site.itinerary-builder.stop',
+				url: '/itinerary-builder/:itineraryIndex/stop/:stopIndex/new',
+				views: {
+					'content@': {
+						templateUrl: 'scripts/itinerary/site-form/site-form.html',
+						//controller: 'stopformController',
+						//controllerAs: 'stopFormCtrl'
+					}
+				}
+			})
+			.state('site.itinerary-builder.stop.site.edit', {
+				parent: 'site.itinerary-builder.stop',
+				url: '/itinerary-builder/:itineraryIndex/stop/:stopIndex/site/edit/:siteIndex',
+				views: {
+					'content@': {
+						templateUrl: 'scripts/itinerary/site-form/site-form.html',
+						//controller: 'stopformController',
+						//controllerAs: 'stopFormCtrl'
+					}
+				}
 			});
 	})
 

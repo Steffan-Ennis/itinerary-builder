@@ -26,6 +26,9 @@
 				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
 			}
 
+			/**
+			 * redirects to currect form
+			 */
 			this.redirectToStopForm = function (stopIndex) {
 				if (typeof stopIndex !== 'undefined') {
 					$state.go('site.itinerary-builder.stop.edit', {
@@ -38,6 +41,12 @@
 					});
 				}
 			};
+
+			this.backToList = function () {
+				console.log('here');
+				$state.go('^');
+			};
+
 		}
 	]);
 }());

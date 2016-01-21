@@ -21,32 +21,31 @@
 			'ui.router',
 			'ngStorage'
 		])
+		.config(function ($stateProvider, $urlRouterProvider) {
+			$.material.init();
+			$stateProvider
 
-	.config(function ($stateProvider, $urlRouterProvider) {
-		$.material.init();
-		$stateProvider
-
-			.state('site', {
-			abstract: true,
-			views: {
-				'navbar@': {
-					templateUrl: 'scripts/components/navbar/navbar.html'
+				.state('site', {
+				abstract: true,
+				views: {
+					'navbar@': {
+						templateUrl: 'scripts/components/navbar/navbar.html'
+					}
 				}
-			}
-		})
+			})
 
-		.state('home', {
-			parent: 'site',
-			url: '/',
-			views: {
-				'content@': {
-					templateUrl: 'views/main.html'
+			.state('home', {
+				parent: 'site',
+				url: '/',
+				views: {
+					'content@': {
+						templateUrl: 'views/main.html'
+					}
 				}
-			}
+			});
+
+
+			$urlRouterProvider.otherwise('/');
 		});
-
-
-		$urlRouterProvider.otherwise('/');
-	});
 
 }());

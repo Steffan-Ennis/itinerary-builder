@@ -23,6 +23,9 @@
 				}
 			};
 
+			this.backtoList = function () {
+				$state.go('^');
+			};
 		}
 	]);
 }());

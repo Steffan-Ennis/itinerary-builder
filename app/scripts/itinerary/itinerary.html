@@ -1,0 +1,28 @@
+<div class = "row">
+  <h1>Itineraries</h1>
+  <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryCtrl.redirectToForm()">Build Itinerary</button>
+  <table class="table table-striped col-lg-12">
+    <tr>
+      <th>Name</th>
+      <th>Total Stops</th>
+      <th>Total Sites</th>   
+      <th>Duration</th>
+      <th class="text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="itinerary in itineraries">
+      <td>{{itinerary.name}}</td>
+      <td>{{itinerary.totalStops}}</td>
+      <td>{{itinerary.totalSites}}</td>
+      <td>{{itinerary.Duration}}</td>
+      <td class="col-lg-3 text-center">
+        <div class="btn-group" role="group">         
+          <button type="button" class="btn btn-raised btn-primary" ng-click="itineraryCtrl.redirectToForm($index)">Edit</button>
+          <button type="button" class="btn btn-raised btn-danger">Delete</button>
+        </div>
+      </td>
+    </tr>
+         
+
+
+  </table>
+</div>

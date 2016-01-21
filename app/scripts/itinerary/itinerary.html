@@ -1,8 +1,13 @@
 <div class = "row">
-  <h1>Itineraries</h1>
-  <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryCtrl.redirectToForm()">Build Itinerary</button>
-  <table class="table table-striped col-lg-12">
+  <h1>Itineraries
+    <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryCtrl.redirectToForm()">
+      <span class="glyphicon glyphicon-plus"></span>
+      <span>Build Itinerary</span>
+    </button>
+  </h1>
+  <table class="table table-striped col-lg-11">
     <tr>
+      <th>#</th>
       <th>Name</th>
       <th>Total Stops</th>
       <th>Total Sites</th>   
@@ -10,15 +15,19 @@
       <th class="text-center">Actions</th>
     </tr>
     <tr ng-repeat="itinerary in itineraries">
+      <td class="td-center">{{itinerary.itineraryIndex}}
       <td>{{itinerary.name}}</td>
-      <td>{{itinerary.totalStops}}</td>
-      <td>{{itinerary.totalSites}}</td>
-      <td>{{itinerary.Duration}}</td>
-      <td class="col-lg-3 text-center">
-        <div class="btn-group" role="group">         
-          <button type="button" class="btn btn-raised btn-primary" ng-click="itineraryCtrl.redirectToForm($index)">Edit</button>
-          <button type="button" class="btn btn-raised btn-danger" ng-click="itineraryCtrl.deleteItinerary($index)">Delete</button>
-        </div>
+      <td>{{itinerary.metaData.totalStops}}</td>
+      <td>{{itinerary.metaData.totalSites}}</td>
+      <td>{{itinerary.metadata.Duration}}</td>
+      <td class="text-center col-lg-3">         
+        <button type="button" class="btn btn-primary" ng-click="itineraryCtrl.redirectToForm($index)">
+          <span class="glyphicon glyphicon-pencil"></span>
+          <span>Edit</span>
+        </button>
+        <button type="button" class="btn btn-danger" ng-click="itineraryCtrl.deleteItinerary($index)">
+        <span class="glyphicon glyphicon-trash"></span>
+        <span>Delete</span></button>
       </td>
     </tr>
   </table>

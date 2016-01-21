@@ -45,22 +45,74 @@
         <label class="control-label" for="focusVisitorCoordAddress">Address:</label>
         <input type="text" class="form-control" id="focusVisitorCoordAddress" name="visitorCoord_address" ng-model="site.visitorCoord.address">
       </div>     
-    </fieldset>>
-    <div class="col-lg-6 form-group label-floating"> 
-      <label class="control-label" for="focuseDate">Departure Date:</label>
-      <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">
-    </div>
-    <div class="col-lg-6 form-group label-floating"> 
-      <label class="control-label" for="focusedDepartureCity">Departure City:</label>
-      <input type="text" class="form-control" id="focusedDepartureCity" name="departureCity" ng-model="stop.departureCity">
-    </div>
-    <div class="col-lg-6 form-group label-floating"> 
-      <label class="control-label" for="focuseArrivalCity">Arrival City:</label>
-      <input type="text" class="form-control" id="focuseArrivalCity" name="arrivalCity" ng-model="stop.arrivalCity">
-    </div>
-    <div class="col-lg-6 form-group label-floating"> 
-      <label class="control-label" for="focusedVisitingClassifiedSites">Visiting Classified Sites:</label>
-      <input type="checkbox" class="form-control" id="focusedVisitingClassifiedSites" name="visitinClassifiedSites" ng-model="stop.visitinClassifiedSites">
-    </div>
+    </fieldset>
+    <fieldset>
+      <legend>Agency or Facility</legend>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusAgencyFacilityName">Name:</label>
+        <input type="text" class="form-control date" id="focusAgencyFacilityName" name="agencyFacility_name" ng-model="site.agencyFaci.name">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusAgencyFacilityPhone">Phone:</label>
+        <input type="text" class="form-control" id="focusAgencyFacilityPhone" name="agencyFacility_phone" ng-model="site.agencyFaci.phone">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusAgencyFacilityEmail">Email:</label>
+        <input type="text" class="form-control" id="focusAgencyFacilityEmail" name="agencyFacility_email" ng-model="site.agencyFaci.email">
+      </div>
+       <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusAgencyFacilityAddress">Address:</label>
+        <input type="text" class="form-control" id="focusAgencyFacilityAddress" name="agencyFacility_address" ng-model="site.agencyFaci.address">
+      </div>  
+    </fieldset>
+    <fieldset>
+      <legend>General</legend>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focuseVisitTo">Visit To:</label>
+        <select ng-options="visitTo.name for visitTo in lengthOfVisitOptions" class="form-control" id="focusLength" name="dateFrom" ng-model="site.visitTo"></select>
+      </div>
+    </fieldset>
+    <fieldset>
+    <fieldset>
+      <legend>Anticipated level of classified information involved</legend>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusAntLevelClassInfo">Level of Australian classified information:</label>
+        <input type="text" class="form-control" id="focusAntLevelClassInfo" name="antLevel_classInfo" ng-model="stop.antLevel.classInfo">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focuAntLevelNonClassInfo">Level of non Australian classified information</label>
+        <input type="text" class="form-control" id="focAntLevelNonClassInfoy" name="antLevel_nonClassInfo" ng-model="stop.antLevel.nonClassInfo">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Sponsor</legend> 
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusSponsorName">Name:</label>
+        <input type="text" class="form-control date" id="focusSponsorName" name="sponsor_name" ng-model="site.sponsor.name">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusSponsorPhone">Phone:</label>
+        <input type="text" class="form-control" id="focusSponsorPhone" name="sponsor_phone" ng-model="site.sponsor.phone">
+      </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusSponsorEmail">Email:</label>
+        <input type="text" class="form-control" id="focusSponsorEmail" name="sponsor_email" ng-model="site.sponsor.email">
+      </div>
+       <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focusSponsorOrganisation">Organisation:</label>
+        <input type="text" class="form-control" id="focusSponsorOrganisation" name="sponsor_organisation" ng-model="site.sponsor.organisation">
+      </div>  
+    </fieldset>   
+    <fieldset>
+      <legend>Purpose of Visit</legend>
+      <div class="col-lg-12 form-group label-floating"> 
+        <label class="control-label" for="focusPurpose">Purpose of visit or subject to be discussed:</label>
+        <input type="textArea" class="form-control" id="focusPurpose" name="purpose" ng-model="site.purpose">
+      </div>
+       <div class="col-lg-12 form-group label-floating"> 
+        <label class="control-label" for="focusSponsorOrganisation">Visit is pertinent to:</label>
+        <select ng-options="peritinentTo.name for peritinentTo in pertinentToOptions" class="form-control" id="focus" name="peritinentTo" ng-model="site.peritinentTo"></select>
+      </div> 
+    </fieldset>
   </form>
 </div>

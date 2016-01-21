@@ -11,14 +11,13 @@
 			self = this;
 
 			$scope.itineraries = itineraryData.itineraries;
-
+			console.log($scope.itineraries);
 			this.deleteItinerary = function (itineraryIndex) {
 				itineraryData.deleteItinerary(itineraryIndex);
 			};
 
 			this.redirectToForm = function (itineraryIndex) {
 				if (typeof itineraryIndex !== 'undefined') {
-					console.log(itineraryIndex);
 					$state.go('site.itinerary-builder.edit', {
 						'itineraryIndex': itineraryIndex
 					});

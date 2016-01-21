@@ -6,23 +6,26 @@
       <input type="text" class="form-control" id="focusedName" name="name" ng-model="itinerary.name">
     </div>
   </form>
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title">Summary</h3>
-    </div>
-    <div class="panel-body">
-      <span>
-        <p>Total Stops {{itinerary.metaData.totalStops}}</p>
-        <p>Total Sites {{itinerary.metaData.totalSites}}</p>
-        <p>Itinerary Duration {{itinerary.metaData.duration}}</p>
-      </span> 
-    </div>
-  </div>
+  <div>
+    <h2>Summary
+      <span class="small">
+          <span>Total Stops <span class="badge badge-info">{{itinerary.metaData.totalStops}}</span></span>
+          <span>Total Sites <span class="badge">{{itinerary.metaData.totalSites}}</span></span>
+          <span>Total Duration <span class="badge">{{itinerary.metaData.duration}}</span></span>
+      </span>
+    </h2>
+
   <div>  
-    <h1>Stops</h1>
-    <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryFormCtrl.redirectToStopForm()">New Stop</button>
-    <table class="table table-striped col-lg-12">
+    <h2>
+      Stops
+      <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryFormCtrl.redirectToStopForm()">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>New Stop</span>
+      </button>
+    </h2>
+    <table class="table table-striped col-lg-12 table-flex">
       <tr>
+        <th>#</th>
         <th>Departure Date</th>
         <th>Departure City</th>
         <th>Arrival City</th>   
@@ -30,14 +33,21 @@
         <th class="text-center">Actions</th>
       </tr>
       <tr ng-repeat="stop in itinerary.stops">
+        <td>{{stop.stopIndex}}</td>
         <td>{{stop.departureDate}}</td>
         <td>{{stop.departureCity}}</td>
         <td>{{stop.arrivalCity}}</td>
         <td>{{stop.visitinClassifiedSites}}</td>
         <td class="col-lg-3 text-center">
           <div class="btn-group" role="group">         
-            <button type="button" class="btn btn-raised btn-primary" ng-click="itineraryFormCtrl.redirectToStopForm($index)">Edit</button>
-            <button type="button" class="btn btn-raised btn-danger" ng-click="itineraryFormCtrl.deleteItinerary($index)">Delete</button>
+            <button type="button" class="btn btn-primary" ng-click="itineraryFormCtrl.redirectToStopForm($index)">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span>Edit</span>
+            </button>
+            <button type="button" class="btn btn-danger" ng-click="itineraryFormCtrl.deleteStop($index)">
+              <span class="glyphicon glyphicon-trash"></span>
+              <span>Delete</span>
+            </button>
           </div>
         </td>
       </tr>         

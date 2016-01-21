@@ -139,14 +139,15 @@
 			/**
 			 * Collection object for itineraries
 			 */
-			this.Itinerary = function (name) {
+			this.Itinerary = function (name, itineraryIndex) {
 				this.stops = [];
 				this.name = name;
+				this.id = itineraryIndex;
 				/* This data is auto populated*/
 				this.metaData = {
-					'total itineraries': 0,
-					'total sites': 0,
-					'duration': ''
+					'totalStops': 0,
+					'totalSites': 0,
+					'duration': 0
 				};
 			};
 
@@ -158,7 +159,8 @@
 			 * @param {String} visitingCity
 			 * @param {bool}   visitingClassifiedSites
 			 */
-			this.Stop = function (departureDate, departureCity, arrivalCity, visitingCity, visitinClassifiedSites) {
+			this.Stop = function (departureDate, departureCity, arrivalCity, visitingCity, visitinClassifiedSites, stopIndex) {
+				this.stopIndex = stopIndex;
 				this.departureDate = departureDate;
 				this.departureCity = departureCity;
 				this.arrivalCity = arrivalCity;
@@ -244,6 +246,7 @@
 			 */
 			this.saveStop = function (stop, itineraryIndex) {
 				$localStorage.itineraries[itineraryIndex].stops.push(stop);
+				$localStorage.itineraries[itineraryIndex].metaData.totalStops++;
 			};
 
 			/**
@@ -254,6 +257,7 @@
 			 */
 			this.updateStop = function (stop, itineraryIndex, stopIndex) {
 				$localStorage.itineraries[itineraryIndex].stops[stopIndex] = stop;
+
 			};
 
 
@@ -264,6 +268,7 @@
 			 */
 			this.deleteStop = function (itineraryIndex, stopIndex) {
 				$localStorage.itineraries[itineraryIndex].stops.splice(stopIndex, 1);
+				$localStorage.itineraries[itineraryIndex].metaData.totalStops--;
 			};
 
 			/**
@@ -271,8 +276,9 @@
 			 * @param  {Site}    site
 			 * @param  {Integer} itineraryIndex
 			 */
-			this.saveSite = function (site, itineraryIndex) {
-				self.trips[itineraryIndex].push(site);
+			this.saveSite = function (site, itineraryIndex, stopIndex) {
+				$localStorage.itineraries[itineraryIndex].stops[stopIndex].push(site);
+				$localStorage.itineraries[itineraryIndex].metaData.totalSites++;
 			};
 
 
@@ -296,6 +302,7 @@
 			 */
 			this.deleteSite = function (siteIndex, stopIndex, itineraryIndex) {
 				$localStorage.itineraries[itineraryIndex].stops[stopIndex].sites.splice(siteIndex, 1);
+				$localStorage.itineraries[itineraryIndex].metaData.totalSites--;
 			};
 
 			/**

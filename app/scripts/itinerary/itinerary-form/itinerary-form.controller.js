@@ -22,12 +22,13 @@
 				itineraryData.saveItinerary(itinerary);
 				$scope.itineraryIndex = $scope.itineraries.length - 1;
 				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
+				$scope.itinerary.itineraryIndex = $scope.itineraryIndex;
 			} else {
 				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
 			}
 
 			this.deleteStop = function (stopIndex) {
-				itineraryData.deleteItinerary($scope.itineraryIndex, stopIndex);
+				itineraryData.deleteStop($scope.itineraryIndex, stopIndex);
 			};
 
 			/**

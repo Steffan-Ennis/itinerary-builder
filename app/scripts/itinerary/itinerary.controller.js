@@ -8,10 +8,9 @@
 			/*
 			 * reference to the current controller for use in functions
 			 */
-			self = this;
+			var self = this;
 
 			$scope.itineraries = itineraryData.itineraries;
-			console.log($scope.itineraries);
 			this.deleteItinerary = function (itineraryIndex) {
 				itineraryData.deleteItinerary(itineraryIndex);
 			};

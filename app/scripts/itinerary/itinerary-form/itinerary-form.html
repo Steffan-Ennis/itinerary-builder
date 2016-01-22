@@ -1,21 +1,14 @@
 <div class="row">
-  <h1>ITINERARY<span class="pull-right"><i ng-click="itineraryFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
+  <h1><span>Itinerary</span>
+  <span ng-show="itinerary.name">[{{itinerary.name}}]</span>
+  <span class="pull-right"><i ng-click="itineraryFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
   <form name="" class="form-horizontal">
     <div class="form-group label-floating"> 
       <label class="control-label" for="focusedName">Name:</label>
       <input type="text" class="form-control" id="focusedName" name="name" ng-model="itinerary.name">
     </div>
   </form>
-  <div ng-show="itineraryIndex"> 
-    <div>
-      <h2>Summary
-        <span class="small">
-            <span>Total Stops <span class="badge badge-info">{{itinerary.metaData.totalStops}}</span></span>
-            <span>Total Sites <span class="badge">{{itinerary.metaData.totalSites}}</span></span>
-            <span>Total Duration <span class="badge">{{itinerary.metaData.duration}}</span></span>
-        </span>
-      </h2>
-    </div>
+  <div ng-show="itineraryIndex >= 0"> 
     <h2>
       <span>Stops</span>
       <button class="btn btn-raised btn-primary pull-right" ng-click="itineraryFormCtrl.redirectToStopForm()">
@@ -29,16 +22,16 @@
         <th>Departure Date</th>
         <th>Departure City</th>
         <th>Arrival City</th>   
-        <th>Visting Classfied Sites</th>
+        <th>Visting Classified Sites</th>
         <th>Total Sites</th>
         <th class="text-center">Actions</th>
       </tr>
       <tr ng-repeat="stop in itinerary.stops">
-        <td>{{stop.stopIndex}}</td>
+        <td>{{$index + 1}}</td>
         <td>{{stop.departureDate}}</td>
         <td>{{stop.departureCity}}</td>
         <td>{{stop.arrivalCity}}</td>
-        <td>{{stop.visitinClassifiedSites}}</td>
+        <td>{{stop.visitingClassifiedSites ? 'Yes' : 'No'}}</td>
         <td>{{stop.sites.length}}</td>
         <td class="col-lg-3 text-center">
           <div class="btn-group" role="group">         
@@ -55,7 +48,11 @@
       </tr>         
     </table>
   </div>
-  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="itineraryFormCtrl.saveItenarary()">
+  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="itineraryFormCtrl.complete()">
+    <span class="glyphicon glyphicon-ok"></span>
+    <span>Complete</span>
+  </button>  
+  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="itineraryFormCtrl.saveItenarary()" data-content="Itinerary Saved!" data-toggle="snackbar" data-timeout="3000">
     <span class="glyphicon glyphicon-save"></span>
     <span>Save</span>
   </button>

@@ -165,18 +165,18 @@
 			 * @param {String} visitingCity
 			 * @param {bool}   visitingClassifiedSites
 			 */
-			this.Stop = function (departureDate, departureCity, arrivalCity, visitingCity, visitinClassifiedSites, stopIndex) {
+			this.Stop = function (departureDate, departureCity, arrivalCity, visitingCity, visitingClassifiedSites, stopIndex) {
 				this.stopIndex = stopIndex;
 				this.departureDate = departureDate;
 				this.departureCity = departureCity;
 				this.arrivalCity = arrivalCity;
 				this.visitingCity = visitingCity;
-				this.visitinClassifiedSites = visitinClassifiedSites;
+				this.visitingClassifiedSites = visitingClassifiedSites;
 				this.sites = [];
 			};
 
 
-			/** 
+			/**  
 			 * Site constructor
 			 * @param {DateRange} DateRange
 			 * @param {VisitType} visitType

@@ -9,7 +9,7 @@
 			/*
 			 * reference to the current controller for use in functions
 			 */
-			self = this;
+			var self = this;
 
 			/*
 			 * Initialising pointer to iteneraries collection
@@ -57,6 +57,8 @@
 				} else {
 					itineraryData.updateSite($scope.site, $scope.siteIndex, $scope.stopIndex, $scope.itineraryIndex);
 				}
+
+				self.backToList();
 			};
 		}
 	]);

@@ -73,7 +73,7 @@
       </div>
     </fieldset>
     <fieldset>
-    <fieldset>
+    <fieldset> 
       <legend>Anticipated level of classified information involved</legend>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusAntLevelClassInfo">Level of Australian classified information:</label>
@@ -107,14 +107,14 @@
       <legend>Purpose of Visit</legend>
       <div class="col-lg-12 form-group label-floating"> 
         <label class="control-label" for="focusPurposeSubject">Purpose of visit or subject to be discussed:</label>
-        <textarea class="form-control" id="focusPurposeSubject" name="purpose_subject" ng-model="site.purpose.subject"></textarea>
+        <textarea class="form-control" id="focusPurposeSubject" name="purpose_subject" ng-model="site.purpose.subject" rows="5"></textarea>
       </div>
        <div class="col-lg-12 form-group"> 
         <label class="control-label">Visit is pertinent to:</label>
         <select ng-options="peritinentTo for peritinentTo in pertinentToOptions" class="form-control" id="focusPurposePertinent" name="purpose_peritinentTo" ng-model="site.purpose.peritinentTo" multiple="true"></select>
       </div> 
     </fieldset>
-    <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="siteFormCtrl.saveSite()">
+    <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="siteFormCtrl.saveSite()" data-content="Site Saved!" data-toggle="snackbar" data-timeout="3000">
       <span class="glyphicon glyphicon-save"></span>
       <span>Save</span>
     </button>

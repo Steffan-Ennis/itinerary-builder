@@ -1,10 +1,6 @@
 <div class="row">
   <h1>Stop<span class="pull-right"><i ng-click="stopFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
-    <form name="" class="form-horizontal">
-      <div class="col-lg-6 form-group label-floating"> 
-        <label class="control-label" for="focuseDate">Departure Date:</label>
-        <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">
-      </div>
+    <form name="" class="form-horizontal">      
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusedDepartureCity">Departure City:</label>
         <input type="text" class="form-control" id="focusedDepartureCity" name="departureCity" ng-model="stop.departureCity">
@@ -13,15 +9,19 @@
         <label class="control-label" for="focuseArrivalCity">Arrival City:</label>
         <input type="text" class="form-control" id="focuseArrivalCity" name="arrivalCity" ng-model="stop.arrivalCity">
       </div>
+      <div class="col-lg-6 form-group label-floating"> 
+        <label class="control-label" for="focuseDate">Departure Date:</label>
+        <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">
+      </div>
       <div class="col-lg-6 checkbox form-group"> 
         <label class="control-label">     
-          <input type="checkbox" name="visitinClassifiedSites" ng-model="stop.visitinClassifiedSites">
+          <input type="checkbox" name="visitinClassifiedSites" ng-model="stop.visitingClassifiedSites">
           <span>Visiting Classified Sites</span>
         </label>
       </div>
     </form>
   <div class="clearfix"></div>  
-  <div ng-show="stop.visitinClassifiedSites && stopIndex">  
+  <div ng-show="stop.visitingClassifiedSites && stopIndex >= 0">  
     <h2>Sites
       <button class="btn btn-raised btn-primary pull-right" ng-click="stopFormCtrl.redirectToSiteForm()">
         <span class= "glyphicon glyphicon-plus"></span>
@@ -38,7 +38,7 @@
         <th class="text-center">Actions</th>
       </tr>
       <tr ng-repeat="site in stop.sites">
-        <td>{{site.siteIndex}}
+        <td>{{$index + 1}}
         <td>{{site.agencyFacility.name}}</td>
         <td>{{site.visitTo}}</td>
         <td>{{site.sponsor.name}}</td>
@@ -58,7 +58,7 @@
       </tr>         
     </table>
   </div>
-  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="stopFormCtrl.saveStop()">
+  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="stopFormCtrl.saveStop()" data-content="Stop Saved!" data-toggle="snackbar" data-timeout="3000">
     <span class="glyphicon glyphicon-save"></span>
     <span>Save</span>
   </button>

@@ -15,7 +15,7 @@
       <th class="text-center">Actions</th>
     </tr>
     <tr ng-repeat="itinerary in itineraries">
-      <td class="td-center">{{itinerary.itineraryIndex}}
+      <td>{{$index + 1}}</td>
       <td>{{itinerary.name}}</td>
       <td>{{itinerary.metaData.totalStops}}</td>
       <td>{{itinerary.metaData.totalSites}}</td>

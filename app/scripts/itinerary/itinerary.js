@@ -82,8 +82,8 @@
 				views: {
 					'content@': {
 						templateUrl: 'scripts/itinerary/site-form/site-form.html',
-						//controller: 'stopformController',
-						//controllerAs: 'stopFormCtrl'
+						controller: 'siteformController',
+						controllerAs: 'siteFormCtrl'
 					}
 				}
 			})
@@ -93,8 +93,8 @@
 				views: {
 					'content@': {
 						templateUrl: 'scripts/itinerary/site-form/site-form.html',
-						//controller: 'stopformController',
-						//controllerAs: 'stopFormCtrl'
+						controller: 'siteformController',
+						controllerAs: 'siteFormCtrl'
 					}
 				}
 			});
@@ -123,18 +123,20 @@
 			 */
 			this.itineraries = $localStorage.itineraries;
 
+
 			/*
 			 * Defining constant option arrays to be passed to forms
 			 */
 
-			this.visitTypes = ['One Time', 'Recurring', 'Extended'];
-			this.requestTypes = ['Amendment', 'Routine', 'Urgent'];
-			this.visitTo = ['Government facility', 'Commercial facility'];
-
-			/**
-			 * Defining constructors for consistency
-			 */
-
+			this.lengthOfVisitOptions = ['One Time', 'Recurring', 'Extended'];
+			this.requestTypeOptions = ['Amendment', 'Routine', 'Urgent'];
+			this.visitToOptions = ['Government facility', 'Commercial facility'];
+			this.pertinentToOptions = ['Equipment or weapon system',
+				'Foreign military sales or export license',
+				'Programme or agreement',
+				'Defence acquisition process',
+				'Other'
+			];
 
 			/**
 			 * Collection object for itineraries
@@ -150,6 +152,10 @@
 					'duration': 0
 				};
 			};
+
+			/**
+			 * Defining constructors for consistency and object validity
+			 */
 
 			/**			
 			 * Itinerary Contstructor
@@ -170,28 +176,40 @@
 			};
 
 
-			/**
+			/** 
 			 * Site constructor
-			 * @param {Date}           dateFrom
-			 * @param {Date}           dateTo
-			 * @param {String}         visitType
-			 * @param {String}         requestType
+			 * @param {DateRange} DateRange
+			 * @param {VisitType} visitType
 			 * @param {AgencyFacility} agencyFacility
-			 * @param {VisitorCoord}   visitorCoord
-			 * @param {Sponsor}        sponsor
-			 * @param {String}         purpose
-			 * @param {String}         visitIsPertinentTo
+			 * @param {VisitCoord} visitorCoord
+			 * @param {Sponsor} sponsor
+			 * @param {Purpose} purpose
+			 * @param {String visitTo
+			 * @param {AntLevel} antLevel
 			 */
-			this.Site = function (dateFrom, dateTo, visitType, requestType, agencyFacility, visitorCoord, sponsor, purpose, visitIsPertinentTo) {
-				this.dateFrom = dateFrom;
-				this.dateTo = dateTo;
+			this.Site = function (DateRange, visitType, agencyFacility, visitorCoord, sponsor, purpose, visitTo, antLevel) {
+				this.DateRange = DateRange;
 				this.visitType = visitType;
-				this.requestType = requestType;
 				this.agencyFacility = agencyFacility;
-				this.visitorCoord = visitorCoord = visitorCoord;
+				this.visitorCoord = visitorCoord;
 				this.sponsor = sponsor;
 				this.purpose = purpose;
-				this.visitIsPertinentTo = visitIsPertinentTo;
+				this.visitTo = visitTo;
+				this.antLevel = antLevel;
+			};
+
+			/**
+			 * Constructs and empty site with correct objects
+			 * @return {Site}
+			 */
+			this.constructEmptySite = function () {
+				var site = new self.Site();
+				site.visitType = new self.VisitType();
+				site.agencyFacility = new self.AgencyFacility();
+				site.visitorCoord = new self.VisitCoord();
+				site.purpose = new self.Purpose();
+				site.antLevel = new self.AntLevel();
+				return site;
 			};
 
 			/**
@@ -238,6 +256,45 @@
 				this.address = address;
 			};
 
+			/**
+			 * VisiType constructor
+			 * @param  {String} lengthOfVisit
+			 * @param  {String} requestType
+			 */
+			this.VisitType = function (lengthOfVisit, requestType) {
+				this.lengthOfVisit = lengthOfVisit;
+				this.requestType = requestType;
+			};
+
+			/**
+			 * DateRange constructor
+			 * @param {String} dateFrom
+			 * @param {String} dateTo
+			 */
+			this.DateRange = function (dateFrom, dateTo) {
+				this.dateFrom = dateFrom;
+				this.dateTo = dateTo;
+			};
+
+			/**
+			 * Purpose constructor
+			 * @param {[type]} subject
+			 * @param {[type]} pertinentTo
+			 */
+			this.Purpose = function (subject, pertinentTo) {
+				this.subject = subject;
+				this.pertinentTo = pertinentTo;
+			};
+
+			/**
+			 * AntLevel constructor
+			 * @param {String} classInfo - Level of Australian Classified Information
+			 * @param {String} nonClassInfo - Level of non Australian Classified Information
+			 */
+			this.AntLevel = function (ausInfo, nonAusInfo) {
+				this.ausInfo = ausInfo;
+				this.nonAusInfo = nonAusInfo;
+			};
 
 			/**
 			 * pushes itenerary onto itenearies at trip index
@@ -277,7 +334,7 @@
 			 * @param  {Integer} itineraryIndex
 			 */
 			this.saveSite = function (site, itineraryIndex, stopIndex) {
-				$localStorage.itineraries[itineraryIndex].stops[stopIndex].push(site);
+				$localStorage.itineraries[itineraryIndex].stops[stopIndex].sites.push(site);
 				$localStorage.itineraries[itineraryIndex].metaData.totalSites++;
 			};
 
@@ -308,8 +365,8 @@
 			/**
 			 * creates a new trip and pushes it onto the trip collection
 			 */
-			this.saveItinerary = function () {
-				$localStorage.itineraries.push(new self.Itinerary());
+			this.saveItinerary = function (itinerary) {
+				$localStorage.itineraries.push(itinerary);
 			};
 
 			/**
@@ -317,7 +374,7 @@
 			 * @param  {Itinerary} itinerary
 			 * @param  {Integer} itineraryIndex
 			 */
-			this.updateItineary = function (itinerary, itineraryIndex) {
+			this.updateItinerary = function (itinerary, itineraryIndex) {
 				$localStorage.itineraries[itineraryIndex] = itinerary;
 			};
 

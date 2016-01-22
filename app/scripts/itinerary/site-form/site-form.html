@@ -1,6 +1,6 @@
 <div class="row">
   <h1>Site<span class="pull-right"><i ng-click="siteFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
-  <form name="" class="form-horizontal">
+  <form name="" class="form-horizontal" submit="">
     <fieldset>
       <legend>Date</legend>
       <div class="col-lg-6 form-group label-floating"> 
@@ -15,12 +15,12 @@
     <fieldset>
       <legend>Visit Type</legend>
       <div class="col-lg-6 form-group label-floating"> 
-        <label class="control-label" for="focusLength">Length of Visit</label>
-        <select ng-options="lengthofVisit.name for lengthofVisit in lengthOfVisitOptions" class="form-control" id="focusLength" name="dateFrom" ng-model="site.lengthOfVisit"></select>
+        <label class="control-label" for="focusVisitTypeLengthOfVisit">Length of Visit</label>
+        <select ng-options="lengthofVisit for lengthofVisit in lengthOfVisitOptions" class="form-control" id="focusVisitTypeLengthOfVisit" name="visitType_lengthOfVisity" ng-model="site.visitType.lengthOfVisit"></select>
       </div>
       <div class="col-lg-6 form-group label-floating"> 
-        <label class="control-label" for="focus">Request Type</label>
-        <select ng-options="requestType.name for requestType in requestTypeOptions" class="form-control" id="focus" name="dateTo" ng-model="site.requestType"></select>
+        <label class="control-label" for="focusVisitTypeRequestType">Request Type</label>
+        <select ng-options="requestType for requestType in requestTypeOptions" class="form-control" id="focusVisitTypeRequestType" name="visitType_requestType" ng-model="site.visitType.requestType"></select>
       </div>    
     </fieldset>
     <fieldset>
@@ -50,26 +50,26 @@
       <legend>Agency or Facility</legend>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusAgencyFacilityName">Name:</label>
-        <input type="text" class="form-control date" id="focusAgencyFacilityName" name="agencyFacility_name" ng-model="site.agencyFaci.name">
+        <input type="text" class="form-control date" id="focusAgencyFacilityName" name="agencyFacility_name" ng-model="site.agencyFacility.name">
       </div>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusAgencyFacilityPhone">Phone:</label>
-        <input type="text" class="form-control" id="focusAgencyFacilityPhone" name="agencyFacility_phone" ng-model="site.agencyFaci.phone">
+        <input type="text" class="form-control" id="focusAgencyFacilityPhone" name="agencyFacility_phone" ng-model="site.agencyFacility.phone">
       </div>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusAgencyFacilityEmail">Email:</label>
-        <input type="text" class="form-control" id="focusAgencyFacilityEmail" name="agencyFacility_email" ng-model="site.agencyFaci.email">
+        <input type="text" class="form-control" id="focusAgencyFacilityEmail" name="agencyFacility_email" ng-model="site.agencyFacility.email">
       </div>
        <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusAgencyFacilityAddress">Address:</label>
-        <input type="text" class="form-control" id="focusAgencyFacilityAddress" name="agencyFacility_address" ng-model="site.agencyFaci.address">
+        <input type="text" class="form-control" id="focusAgencyFacilityAddress" name="agencyFacility_address" ng-model="site.agencyFacility.address">
       </div>  
     </fieldset>
     <fieldset>
       <legend>General</legend>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focuseVisitTo">Visit To:</label>
-        <select ng-options="visitTo.name for visitTo in lengthOfVisitOptions" class="form-control" id="focusLength" name="dateFrom" ng-model="site.visitTo"></select>
+        <select ng-options="visitTo for visitTo in visitToOptions" class="form-control" id="focuseVisitTo" name="visitTo" ng-model="site.visitTo"></select>
       </div>
     </fieldset>
     <fieldset>
@@ -77,11 +77,11 @@
       <legend>Anticipated level of classified information involved</legend>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focusAntLevelClassInfo">Level of Australian classified information:</label>
-        <input type="text" class="form-control" id="focusAntLevelClassInfo" name="antLevel_classInfo" ng-model="stop.antLevel.classInfo">
+        <input type="text" class="form-control" id="focusAntLevelClassInfo" name="antLevel_ausInfo" ng-model="stop.antLevel.ausInfo">
       </div>
       <div class="col-lg-6 form-group label-floating"> 
         <label class="control-label" for="focuAntLevelNonClassInfo">Level of non Australian classified information</label>
-        <input type="text" class="form-control" id="focAntLevelNonClassInfoy" name="antLevel_nonClassInfo" ng-model="stop.antLevel.nonClassInfo">
+        <input type="text" class="form-control" id="focAntLevelNonClassInfoy" name="antLevel_nonAusInfo" ng-model="stop.antLevel.nonAusInfo">
       </div>
     </fieldset>
     <fieldset>
@@ -106,13 +106,17 @@
     <fieldset>
       <legend>Purpose of Visit</legend>
       <div class="col-lg-12 form-group label-floating"> 
-        <label class="control-label" for="focusPurpose">Purpose of visit or subject to be discussed:</label>
-        <input type="textArea" class="form-control" id="focusPurpose" name="purpose" ng-model="site.purpose">
+        <label class="control-label" for="focusPurposeSubject">Purpose of visit or subject to be discussed:</label>
+        <textarea class="form-control" id="focusPurposeSubject" name="purpose_subject" ng-model="site.purpose.subject"></textarea>
       </div>
-       <div class="col-lg-12 form-group label-floating"> 
-        <label class="control-label" for="focusSponsorOrganisation">Visit is pertinent to:</label>
-        <select ng-options="peritinentTo.name for peritinentTo in pertinentToOptions" class="form-control" id="focus" name="peritinentTo" ng-model="site.peritinentTo"></select>
+       <div class="col-lg-12 form-group"> 
+        <label class="control-label">Visit is pertinent to:</label>
+        <select ng-options="peritinentTo for peritinentTo in pertinentToOptions" class="form-control" id="focusPurposePertinent" name="purpose_peritinentTo" ng-model="site.purpose.peritinentTo" multiple="true"></select>
       </div> 
     </fieldset>
+    <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="siteFormCtrl.saveSite()">
+      <span class="glyphicon glyphicon-save"></span>
+      <span>Save</span>
+    </button>
   </form>
 </div>

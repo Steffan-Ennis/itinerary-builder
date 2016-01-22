@@ -18,20 +18,14 @@
 			/**
 			 * initialising the pointer to the current stop
 			 */
-			var itineraryIndex = $stateParams.intineraryIndex;
-
-			if (typeof $stateParams.stopIndex === 'undefined') {
-				var stop = new itineraryData.Stop();
-				itineraryData.saveStop(stop, $scope.itineraryIndex);
-				$scope.stopIndex = $scope.itineraries[$scope.itineraryIndex].stops.length - 1;
-				$scope.stop = itineraryData.itineraries[$scope.itineraryIndex].stops[$scope.stopIndex];
-				$scope.stop.stopIndex = $scope.stopIndex;
+			if (typeof $scope.stopIndex === 'undefined') {
+				$scope.stop = new itineraryData.Stop();
 			} else {
-				$scope.stop = itineraryData.itineraries[$scope.itineraryIndex].stops[$stateParams.stopIndex];
+				$scope.stop = itineraryData.itineraries[$scope.itineraryIndex].stops[$scope.stopIndex];
 			}
 
 			this.deleteSite = function (siteIndex) {
-				itineraryData.deleteItinerary($scope.itineraryIndex, $scope.stopIndex, siteIndex);
+				itineraryData.deleteSite(siteIndex, $scope.stopIndex, $scope.itineraryIndex);
 			};
 
 			this.redirectToSiteForm = function (siteIndex) {
@@ -56,6 +50,18 @@
 				});
 			};
 
+			/**
+			 * Checks if in the edit screen and updates else saves a new stop
+			 */
+			this.saveStop = function () {
+				if (typeof $scope.stopIndex === 'undefined') {
+					itineraryData.saveStop($scope.stop, $scope.itineraryIndex);
+					$scope.stopIndex = $scope.itineraries[$scope.itineraryIndex].stops.length - 1;
+					$scope.stop.stopIndex = $scope.stopIndex;
+				} else {
+					itineraryData.updateStop($scope.stop, $scope.itineraryIndex, $scope.stopIndex);
+				}
+			};
 		}
 	]);
 }());

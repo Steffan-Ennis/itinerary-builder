@@ -21,7 +21,7 @@
       </div>
     </form>
   <div class="clearfix"></div>  
-  <div ng-show="stop.visitinClassifiedSites">  
+  <div ng-show="stop.visitinClassifiedSites && stopIndex">  
     <h2>Sites
       <button class="btn btn-raised btn-primary pull-right" ng-click="stopFormCtrl.redirectToSiteForm()">
         <span class= "glyphicon glyphicon-plus"></span>
@@ -39,17 +39,27 @@
       </tr>
       <tr ng-repeat="site in stop.sites">
         <td>{{site.siteIndex}}
-        <td>{{site.agencyFacility}}</td>
+        <td>{{site.agencyFacility.name}}</td>
         <td>{{site.visitTo}}</td>
-        <td>{{site.sponsor}}</td>
-        <td>{{site.purpose}}</td>
+        <td>{{site.sponsor.name}}</td>
+        <td>{{site.purpose.subject}}</td>
         <td class="col-lg-3 text-center">
           <div class="btn-group" role="group">         
-            <button type="button" class="btn btn-primary" ng-click="siteCtrl.redirectToSiteForm($index)">Edit</button>
-            <button type="button" class="btn btn-danger" ng-click="itineraryFormCtrl.deleteSite($index)">Delete</button>
+            <button type="button" class="btn btn-primary" ng-click="stopFormCtrl.redirectToSiteForm($index)">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span>Edit</span>
+            </button>
+            <button type="button" class="btn btn-danger" ng-click="stopFormCtrl.deleteSite($index)">
+              <span class="glyphicon glyphicon-trash"></span>
+              <span>Delete</span>
+            </button>
           </div>
         </td>
       </tr>         
     </table>
   </div>
+  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="stopFormCtrl.saveStop()">
+    <span class="glyphicon glyphicon-save"></span>
+    <span>Save</span>
+  </button>
 </div>

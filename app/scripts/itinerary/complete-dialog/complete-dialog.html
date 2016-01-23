@@ -1,0 +1,74 @@
+<div id="complete-dialog" class="modal fade" tabindex="-1" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 class="modal-title">
+          <span>Summary</span> 
+          <span ng-show="itinerary.name">[{{itinerary.name}}]</span>
+        </h2>
+      </div>
+      <div class="modal-body">
+        <div class ="">
+          <ul class="nav nav-pills">
+            <li class="col-lg-12">
+              <h3>
+                <span>
+                  <span>Total Stops</span> 
+                  <small class="badge">{{itinerary.metaData.totalStops}}</small>
+                </span>
+                <span>
+                  <span>Total Sites</span>
+                  <small class="badge">{{itinerary.metaData.totalSites}}</small>
+                </span>
+                <span class="pull-right">
+                 {{duration}}
+               </span>
+              </h3>
+              <div class="list-group col-lg-12 well" ng-repeat="stop in itinerary.stops">
+                <div class="list-group-item">
+                  <div class="row-content">
+                    <div class="least-content" ng-show="stop.visitingClassifiedSites">
+                      <span class="text-warning">
+                        <span>Classified Sites</span>
+                        <span class="badge">{{stop.sites.length}}</span>
+                      </span>
+                    </div>
+                    <h4 class="list-group-item-heading">
+                      <span>
+                        {{stop.departureCity}}
+                        <i class="material-icons">flight_land</i>
+                        {{stop.arrivalCity}}
+                      </span>
+                    </h4>
+                    <p class="list-group-item-text">
+                      <span>{{stop.departureDate}}</span>
+                      <span ng-show="stop.departureDate && itinerary.stops[$index +1].departureDate">-</span> 
+                      <span>{{itinerary.stops[$index +1].departureDate}}</span>
+                    </p>
+                    <div> 
+                      <table class="table" ng-show="stop.sites.length" class="col-lg-12">                       
+                        <tr>
+                          <th class="col-lg-4">Dates</th>
+                          <th class="col-lg-4">Agency/Facility</th>
+                          <th class="col-lg-4">VisitTo</th>
+                        </tr>
+                        <tr ng-repeat="site in stop.sites">
+                          <td>{{site.dateRange.dateFrom}} - {{site.dateRange.dateTo}}</td>
+                          <td>{{site.agencyFacility.name}}</td>
+                          <td>{{site.visitTo}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss<div class="ripple-container"><div class="ripple ripple-on ripple-out" style="left: 35.6562px; top: 13px; transform: scale(10.875); background-color: rgb(0, 150, 136);"></div><div class="ripple ripple-on ripple-out" style="left: 37.6562px; top: 20px; transform: scale(10.875); background-color: rgb(0, 150, 136);"></div><div class="ripple ripple-on ripple-out" style="left: 29.6562px; top: 17px; transform: scale(10.875); background-color: rgb(0, 150, 136);"></div><div class="ripple ripple-on ripple-out" style="left: 48.6562px; top: 17px; transform: scale(10.875); background-color: rgb(0, 150, 136);"></div><div class="ripple ripple-on ripple-out" style="left: 36.6562px; top: 16px; transform: scale(10.875); background-color: rgb(0, 150, 136);"></div></div></button>
+      </div>
+    </div>
+  </div>
+</div>

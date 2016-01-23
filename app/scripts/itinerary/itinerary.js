@@ -100,6 +100,15 @@
 			});
 	})
 
+	.directive('completeDialogue', function () {
+		return {
+			restric: 'E',
+			templateUrl: 'scripts/itinerary/complete-dialog/complete-dialog.html',
+			controller: 'completeDialogController',
+			controllerAs: 'completeDialogCtrl',
+		};
+	})
+
 	/**
 	 * CRUD and data store  for itinerary data
 	 * @return itineraryData service for dependency injection

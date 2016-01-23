@@ -30,14 +30,14 @@
      </h2>
     <table class="table table-striped col-lg-12">
       <tr>
-        <th>#</th>
-        <th>Agency/Facility</th>
-        <th>Visit to</th>
-        <th>Sponsor</th>   
+        <th class="col-lg-1">#</th>
+        <th class="col-lg-1">Agency/Facility</th>
+        <th class="col-lg-1">Visit to</th>
+        <th class="col-lg-1">Sponsor</th>   
         <th>Purpose of Visit</th>
         <th class="text-center">Actions</th>
       </tr>
-      <tr ng-repeat="site in stop.sites">
+      <tr ng-repeat="site in stop.sites track by $index">
         <td>{{$index + 1}}
         <td>{{site.agencyFacility.name}}</td>
         <td>{{site.visitTo}}</td>

@@ -11,17 +11,18 @@
 			 */
 			var self = this;
 			$scope.itineraries = itineraryData.itineraries;
-			$scope.itinerary = undefined;
 			$scope.itineraryIndex = $stateParams.itineraryIndex;
 
 			/**
-			 * initialising the pointer to the current itinerary
+			 * initialising the pointer to the current itinerary 
 			 */
 			if (typeof $scope.itineraryIndex === 'undefined') {
 				$scope.itinerary = new itineraryData.Itinerary();
 			} else {
 				$scope.itinerary = itineraryData.itineraries[$scope.itineraryIndex];
 			}
+
+			$scope.showComplete = $scope.itinerary.stops.length >= 1;
 
 			this.deleteStop = function (stopIndex) {
 				itineraryData.deleteStop($scope.itineraryIndex, stopIndex);
@@ -52,12 +53,9 @@
 			 */
 			this.saveItenarary = function () {
 				if (typeof $scope.itineraryIndex === 'undefined') {
-					console.log('saving new Itinerary');
 					itineraryData.saveItinerary($scope.itinerary);
 					$scope.itineraryIndex = itineraryData.itineraries.length - 1;
-					console.log($scope.itineraryIndex);
 				} else {
-					console.log('saving update Itinerary');
 					itineraryData.updateItinerary($scope.itinerary, $scope.itineraryIndex);
 				}
 			};

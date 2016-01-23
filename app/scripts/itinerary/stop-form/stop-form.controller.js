@@ -29,7 +29,7 @@
 			};
 
 			this.redirectToSiteForm = function (siteIndex) {
-				if (siteIndex) {
+				if (siteIndex >= 0) {
 					$state.go('site.itinerary-builder.stop.site.edit', {
 						'itineraryIndex': $scope.itineraryIndex,
 						'stopIndex': $scope.stopIndex,
@@ -53,7 +53,7 @@
 			 * Checks if in the edit screen and updates else saves a new stop
 			 */
 			this.saveStop = function () {
-				if (!$scope.stopIndex) {
+				if (typeof $scope.stopIndex === 'undefined') {
 					itineraryData.saveStop($scope.stop, $scope.itineraryIndex);
 					$scope.stopIndex = $scope.itineraries[$scope.itineraryIndex].stops.length - 1;
 					$scope.stop.stopIndex = $scope.stopIndex;
@@ -61,10 +61,12 @@
 					itineraryData.updateStop($scope.stop, $scope.itineraryIndex, $scope.stopIndex);
 				}
 
+
 				/*
 				 * Auto create  a stop with derparture city set to the current arrival city
 				 */
 				if ($scope.stop.arrivalCity && $scope.stopIndex == $scope.itineraries[$scope.itineraryIndex].stops.length - 1) {
+
 					var connectingStop = new itineraryData.Stop();
 					connectingStop.departureCity = $scope.stop.arrivalCity;
 					itineraryData.saveStop(connectingStop, $scope.itineraryIndex);

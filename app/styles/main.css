@@ -94,5 +94,11 @@ td {
     border-bottom: 0;
   }
 
- 
+  ul .ul-inline {
+    display: inline;
+  }
+
+  ul .ul-no-list-style {
+    list-style-type: none;
+  }
 }

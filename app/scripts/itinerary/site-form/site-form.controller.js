@@ -53,6 +53,7 @@
 			 */
 			this.saveSite = function () {
 				if (typeof $scope.siteIndex === 'undefined') {
+					console.log('in here');
 					itineraryData.saveSite($scope.site, $scope.itineraryIndex, $scope.stopIndex);
 				} else {
 					itineraryData.updateSite($scope.site, $scope.siteIndex, $scope.stopIndex, $scope.itineraryIndex);

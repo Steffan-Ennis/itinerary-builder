@@ -48,12 +48,15 @@
       </tr>         
     </table>
   </div>
-  <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="itineraryFormCtrl.complete()">
+  <button type="submit" ng-show="showComplete" class="pull-right btn btn-raised btn-primary" ng-click="itineraryFormCtrl.complete()" data-toggle="modal" data-target="#complete-dialog">
     <span class="glyphicon glyphicon-ok"></span>
     <span>Complete</span>
+    <div class="ripple-container"></div>
   </button>  
   <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="itineraryFormCtrl.saveItenarary()" data-content="Itinerary Saved!" data-toggle="snackbar" data-timeout="3000">
     <span class="glyphicon glyphicon-save"></span>
     <span>Save</span>
   </button>
+  
+  <complete-dialogue></complete-dialogue>
 </div>

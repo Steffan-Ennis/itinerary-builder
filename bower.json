@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "^1.4.0",
-    "bootstrap": "^3.2.0",
+    "bootstrap": "~3.3.4",
     "angular-animate": "^1.4.0",
     "angular-aria": "^1.4.0",
     "angular-cookies": "^1.4.0",
@@ -29,6 +29,12 @@
         "less/bootstrap.less",
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
+      ]
+    },
+    "snackbarjs": {
+      "main": [
+        "dist/snackbar.min.css",
+        "dist/snackbar.min.js"
       ]
     }
   }

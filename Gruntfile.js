@@ -204,6 +204,12 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
+        include: [
+          'bower_components/snackbarjs/dis/snackbar.min.css'
+        ],
+        exclude: [
+          'bower_components/bootstrap-sass'
+        ],
         ignorePath: /\.\.\//
       },
       test: {
@@ -382,7 +388,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '*.html',
+            '**/*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]

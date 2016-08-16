@@ -204,13 +204,11 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        include: [
-          'bower_components/snackbarjs/dis/snackbar.min.css'
-        ],
-        exclude: [
-          'bower_components/bootstrap-sass'
-        ],
-        ignorePath: /\.\.\//
+        options: {
+          directory: './bower_components',
+          bowerJson: require('./bower.json'),
+          exclude: 'bower_components/bootstrap-sass'
+        }
       },
       test: {
         devDependencies: true,

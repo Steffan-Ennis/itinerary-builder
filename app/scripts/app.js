@@ -19,7 +19,8 @@
 			'ngSanitize',
 			'ngTouch',
 			'ui.router',
-			'ngStorage'
+			'ngStorage',
+      'validators'
 		])
 		.config(function ($stateProvider, $urlRouterProvider) {
 			$.material.init();

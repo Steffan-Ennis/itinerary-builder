@@ -39,6 +39,7 @@ module.exports = function(config) {
       'bower_components/arrive/src/arrive.js',
       'bower_components/ngstorage/ngStorage.js',
       'bower_components/snackbarjs/dist/snackbar.min.js',
+      'bower_components/moment/moment.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

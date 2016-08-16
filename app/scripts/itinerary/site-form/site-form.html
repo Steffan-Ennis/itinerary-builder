@@ -1,15 +1,18 @@
 <div class="row">
   <h1>Site<span class="pull-right"><i ng-click="siteFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
-  <form name="" class="form-horizontal" submit="">
+  <form name="siteForm" class="form-horizontal" novalidate submit="">
     <fieldset>
       <legend>Date</legend>
-      <div class="col-lg-6 form-group label-floating">
+      <div class="col-lg-6 form-group">
         <label class="control-label" for="focuseDateFrom">Date From:</label>
         <input type="date" class="form-control date" id="focuseDateFrom" name="dateFrom" ng-model="site.dateRange.dateFrom">
       </div>
-      <div class="col-lg-6 form-group label-floating">
+      <div class="col-lg-6 form-group" ng-class="{'error':siteForm.dateTo.$error.beforeDate}">
         <label class="control-label" for="focuseDateTo">Date To:</label>
         <input type="date" before-date="site.dateRange.dateFrom" class="form-control date" id="focuseDateTo" name="dateTo" ng-model="site.dateRange.dateTo">
+        <div ng-messages="siteForm.dateTo.$error" role="alert">
+          <div ng-message="beforeDate" class="error">Date To must be after {{site.dateRange.dateFrom}}</ng-message>
+        </div>
       </div>
     </fieldset>
     <fieldset>

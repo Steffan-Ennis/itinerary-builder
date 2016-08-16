@@ -101,4 +101,21 @@ td {
   ul .ul-no-list-style {
     list-style-type: none;
   }
+
+  .form-group.error .form-control {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .form-group.error.is-focused .form-control {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f44336), to(#f44336)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
+    background-image: -webkit-linear-gradient(#f44336, #f44336), -webkit-linear-gradient(#D2D2D2, #D2D2D2);
+    background-image: -o-linear-gradient(#f44336, #f44336), -o-linear-gradient(#D2D2D2, #D2D2D2);
+    background-image: linear-gradient(#f44336, #f44336), linear-gradient(#D2D2D2, #D2D2D2);
+  }
+  .form-group.error label.control-label,
+  .form-group.error .help-block,
+  div[ng-message].error {
+    color: #f44336;
+  }
+
 }

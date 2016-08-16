@@ -20,7 +20,7 @@
 			'ngTouch',
 			'ui.router',
 			'ngStorage',
-      'validators'
+      'validators',
 		])
 		.config(function ($stateProvider, $urlRouterProvider) {
 			$.material.init();

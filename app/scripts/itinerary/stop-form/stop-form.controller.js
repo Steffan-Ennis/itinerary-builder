@@ -14,7 +14,10 @@
 			$scope.stop; // = undefined;
 			$scope.itineraryIndex = $stateParams.itineraryIndex;
 			$scope.stopIndex = $stateParams.stopIndex;
-
+      $scope.dateOptions = {
+        minDate: new Date()
+      };
+      
 			/**
 			 * initialising the pointer to the current stop
 			 */

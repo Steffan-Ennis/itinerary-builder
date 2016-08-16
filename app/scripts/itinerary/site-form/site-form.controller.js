@@ -20,7 +20,9 @@
 			$scope.itineraryIndex = $stateParams.itineraryIndex;
 			$scope.stopIndex = $stateParams.stopIndex;
 			$scope.siteIndex = $stateParams.siteIndex;
-
+      $scope.dateOptions = {
+        minDate: new Date()
+      };
 
 			/*
 			 * Granting the form access to site options

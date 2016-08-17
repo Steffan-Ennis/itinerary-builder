@@ -3,14 +3,14 @@
   <form name="siteForm" class="form-horizontal" novalidate submit="">
     <fieldset>
       <legend>Date</legend>
-      <div class="col-lg-6 form-group" ng-class="{'error':siteForm.dateTo.$error.beforeDate && siteForm.dateTo.$dirty}">
+      <div class="col-lg-6 form-group" ng-class="{'error':siteForm.dateFrom.$invalid && siteForm.dateFrom.$dirty}">
         <label class="control-label" for="focuseDateFrom">Date From:</label>
         <input ng-model-options="{allowInvalid:true}" type="date" before-date="site.dateRange.dateTo" class="form-control date" id="focuseDateFrom" name="dateFrom" ng-model="site.dateRange.dateFrom">
         <div ng-messages="siteForm.dateFrom.$error" role="alert">
           <div ng-message="beforeDate" class="error">Date To must be before {{site.dateRange.dateTo | date:'dd-MM-yyyy': '+0930'}}</div>
         </div>
       </div>
-      <div class="col-lg-6 form-group" ng-class="{'error':siteForm.dateTo.$error.afterDate && siteForm.dateTo.$dirty}">
+      <div class="col-lg-6 form-group" ng-class="{'error':siteForm.dateTo.$invalid && siteForm.dateTo.$dirty}">
         <label class="control-label" for="focuseDateTo">Date To:</label>
         <input ng-model-options="{allowInvalid:true}" type="date" after-date="site.dateRange.dateFrom" class="form-control date" id="focuseDateTo" name="dateTo" ng-model="site.dateRange.dateTo">
         <div ng-messages="siteForm.dateTo.$error" role="alert">
@@ -79,7 +79,6 @@
       </div>
     </fieldset>
     <fieldset>
-    <fieldset>
       <legend>Anticipated level of classified information involved</legend>
       <div class="col-lg-6 form-group label-floating">
         <label class="control-label" for="focusAntLevelClassInfo">Level of Australian classified information:</label>
@@ -120,7 +119,7 @@
         <select ng-options="peritinentTo for peritinentTo in pertinentToOptions" class="form-control" id="focusPurposePertinent" name="purpose_peritinentTo" ng-model="site.purpose.peritinentTo" multiple="true"></select>
       </div>
     </fieldset>
-    <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="siteFormCtrl.saveSite()" data-content="Site Saved!" data-toggle="snackbar" data-timeout="3000">
+    <button type="submit" ng-disabled="siteForm.$invalid" class="pull-right btn btn-raised btn-primary" ng-click="siteFormCtrl.saveSite()" data-content="Site Saved!" data-toggle="snackbar" data-timeout="3000">
       <span class="glyphicon glyphicon-save"></span>
       <span>Save</span>
     </button>

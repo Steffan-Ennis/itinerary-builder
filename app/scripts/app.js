@@ -21,8 +21,9 @@
 			'ui.router',
 			'ngStorage',
       'validators',
+      'google.places',
 		])
-		.config(function ($stateProvider, $urlRouterProvider) {
+		.config(function ($stateProvider, $urlRouterProvider,$httpProvider) {
 			$.material.init();
 			$stateProvider
 

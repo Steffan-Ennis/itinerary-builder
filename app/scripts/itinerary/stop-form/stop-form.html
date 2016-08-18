@@ -1,27 +1,27 @@
 <div class="row">
   <h1>Stop<span class="pull-right"><i ng-click="stopFormCtrl.backToList()" class="material-icons md-48">chevron_left</i></span></h1>
-    <form name="" class="form-horizontal">      
-      <div class="col-lg-6 form-group label-floating"> 
+    <form name="" class="form-horizontal">
+      <div class="col-lg-6 form-group label-floating">
         <label class="control-label" for="focusedDepartureCity">Departure City:</label>
-        <input type="text" class="form-control" id="focusedDepartureCity" name="departureCity" ng-model="stop.departureCity">
+        <input type="text" g-places-autocomplete options="autocompleteOptions" class="form-control" id="focusedDepartureCity" name="departureCity" ng-model="stop.departureCity">
       </div>
-      <div class="col-lg-6 form-group label-floating"> 
+      <div class="col-lg-6 form-group label-floating">
         <label class="control-label" for="focuseArrivalCity">Arrival City:</label>
-        <input type="text" class="form-control" id="focuseArrivalCity" name="arrivalCity" ng-model="stop.arrivalCity">
+        <input type="text" g-places-autocomplete options="autocompleteOptions" class="form-control" id="focuseArrivalCity" name="arrivalCity" ng-model="stop.arrivalCity">
       </div>
-      <div class="col-lg-6 form-group label-floating"> 
+      <div class="col-lg-6 form-group label-floating">
         <label class="control-label" for="focuseDate">Departure Date:</label>
         <input type="text" class="form-control date" id="focuseDate" name="departureDate" ng-model="stop.departureDate">
       </div>
-      <div class="col-lg-6 checkbox form-group"> 
-        <label class="control-label">     
+      <div class="col-lg-6 checkbox form-group">
+        <label class="control-label">
           <input type="checkbox" name="visitinClassifiedSites" ng-model="stop.visitingClassifiedSites">
           <span>Visiting Classified Sites</span>
         </label>
       </div>
     </form>
-  <div class="clearfix"></div>  
-  <div ng-show="stop.visitingClassifiedSites && stopIndex >= 0">  
+  <div class="clearfix"></div>
+  <div ng-show="stop.visitingClassifiedSites && stopIndex >= 0">
     <h2>Sites
       <button class="btn btn-raised btn-primary pull-right" ng-click="stopFormCtrl.redirectToSiteForm()">
         <span class= "glyphicon glyphicon-plus"></span>
@@ -33,7 +33,7 @@
         <th class="col-lg-1">#</th>
         <th class="col-lg-1">Agency/Facility</th>
         <th class="col-lg-1">Visit to</th>
-        <th class="col-lg-1">Sponsor</th>   
+        <th class="col-lg-1">Sponsor</th>
         <th>Purpose of Visit</th>
         <th class="text-center">Actions</th>
       </tr>
@@ -44,7 +44,7 @@
         <td>{{site.sponsor.name}}</td>
         <td>{{site.purpose.subject}}</td>
         <td class="col-lg-3 text-center">
-          <div class="btn-group" role="group">         
+          <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" ng-click="stopFormCtrl.redirectToSiteForm($index)">
               <span class="glyphicon glyphicon-pencil"></span>
               <span>Edit</span>
@@ -55,7 +55,7 @@
             </button>
           </div>
         </td>
-      </tr>         
+      </tr>
     </table>
   </div>
   <button type="submit" class="pull-right btn btn-raised btn-primary" ng-click="stopFormCtrl.saveStop()" data-content="Stop Saved!" data-toggle="snackbar" data-timeout="3000">

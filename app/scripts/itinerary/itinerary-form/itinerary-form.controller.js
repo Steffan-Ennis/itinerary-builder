@@ -14,7 +14,7 @@
 			$scope.itineraryIndex = $stateParams.itineraryIndex;
 
 			/**
-			 * initialising the pointer to the current itinerary 
+			 * initialising the pointer to the current itinerary
 			 */
 			if (typeof $scope.itineraryIndex === 'undefined') {
 				$scope.itinerary = new itineraryData.Itinerary();
@@ -44,7 +44,38 @@
 				}
 			};
 
-			this.backToList = function () {
+      /**
+       * @ngdocs function
+       * @description determine weather itinerary.stops[$index] is last and arrival
+       * city is the first elements departure city
+       * @param $index stop index
+       */
+      this.isLastAndNotSameAsFirst = function($index) {
+        var convertedIndex;
+
+        if($index != undefined){
+          convertedIndex = $index + 1;
+        } else {
+          convertedIndex = $scope.itinerary.stops.length;
+          $index = convertedIndex -1;
+        }
+
+        if(convertedIndex == $scope.itinerary.stops.length) {
+
+          var startCity = $scope.itinerary.stops[0].departureCity;
+          var endCity = $scope.itinerary.stops[$index].arrivalCity;
+
+          if(!startCity || !endCity) {
+            return true;
+          }
+
+          return (startCity.formatted_address !== endCity.formatted_address);
+        } else {
+          return false
+        }
+      };
+
+      this.backToList = function () {
 				$state.go('^');
 			};
 

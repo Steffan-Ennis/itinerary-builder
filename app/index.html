@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css" />
     <link rel="stylesheet" href="../bower_components/bootstrap-material-design/dist/css/ripples.css" />
     <link rel="stylesheet" href="../bower_components/snackbarjs/dist/snackbar.min.css" />
+    <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+    <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="../bower_components/angular-ui-bootstrap/src/datepicker/datepicker.css"/>
     <!-- endbuild -->
@@ -57,9 +59,11 @@
     <script src="../bower_components/ngstorage/ngStorage.js"></script>
     <script src="../bower_components/snackbarjs/dist/snackbar.min.js"></script>
     <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+    <script src="../bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
     <!-- endbower -->
 
-    <script src="../bower_components/angular-ui-bootstrap/src/datepicker/datepicker.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4m971iCtkgKjsmUabZUFV9XtBUj8dM74&libraries=places"></script>
 
     <!-- endbuild -->
 
@@ -73,9 +77,12 @@
         <script src="scripts/itinerary/complete-dialog/complete-dialog.controller.js"></script>
         <script src="scripts/components/utils/utils.module.js"></script>
         <script src="scripts/components/utils/utils.moment.service.js"></script>
+        <script src="scripts/components/utils/utils.tooltip.directive.js"></script>
         <script src="scripts/components/validators/validators.module.js"></script>
         <script src="scripts/components/validators/after-date/validators.after_date.directive.js"></script>
         <script src="scripts/components/validators/before-date/validators.before_date.directive.js"></script>
+        <script src="scripts/components/utils/utils.google.service.js"></script>
+        <script src="scripts/components/utils/utils.google.distance.service.js"></script>
     <!-- endbuild -->
 </body>
 </html>

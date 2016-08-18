@@ -11,15 +11,15 @@
   distance_matrix.$inject = ['google','$q'];
 
   function distance_matrix(google,$q) {
+    var distanceService = new google.maps.DistanceMatrixService()
 
     var service = {};
     service.getDistanceByFoot = function (stops) {
 
       var deferred = $q.defer();
-      var distanceService = new google.maps.DistanceMatrixService();
       var origins = [];
       var destinations = [];
-      
+
       angular.forEach(stops,function(stop){
         origins.push(stop.departureCity.formatted_address);
         destinations.push(stop.arrivalCity.formatted_address);

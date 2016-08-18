@@ -25,7 +25,7 @@
 
       function link(scope,elem,attr,ngModel) {
         ngModel.$validators.afterDate = function (modelValue, viewValue) {
-          if (moment.isDate(scope.afterDate) && moment(modelValue).isAfter(scope.afterDate)){
+          if (!scope.afterDate || (moment.isDate(scope.afterDate) && moment(modelValue).isAfter(scope.afterDate))){
             return true;
           } else {
             return false;

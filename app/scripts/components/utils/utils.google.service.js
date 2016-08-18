@@ -5,9 +5,9 @@
   'use strict';
 
   angular.module('utils')
-    .service('google',moment);
+    .service('google',google);
 
-  function moment (){
+  function google (){
     return window.google;
   }
 

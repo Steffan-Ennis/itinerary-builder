@@ -44,9 +44,12 @@ module.exports = function(config) {
       'bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      "app/scripts/**/*.js",
-      "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      "app/scripts/**/*.module.js",
+      "app/scripts/app.js",
+      "app/scripts/**/*.controller.js",
+      "app/scripts/**/*.directive.js",
+      "app/scripts/**/*.service.js",
+      "app/scripts/**/*.spec.js",
     ],
 
     // list of files / patterns to exclude
@@ -65,13 +68,13 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      "PhantomJS"
+      "PhantomJS",
     ],
 
     // Which plugins to enable
     plugins: [
       "karma-phantomjs-launcher",
-      "karma-jasmine"
+      "karma-jasmine",
     ],
 
     // Continuous Integration mode
